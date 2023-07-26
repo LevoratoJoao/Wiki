@@ -4,8 +4,6 @@ from django.shortcuts import render
 from . import util
 from markdown2 import Markdown
 
-class SearchForm(forms.Form):
-    query = forms.CharField(label='Search', max_length=50)
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
