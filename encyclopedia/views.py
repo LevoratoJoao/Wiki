@@ -4,6 +4,9 @@ from django.shortcuts import render
 from . import util
 from markdown2 import Markdown
 
+class NewPageText(forms.Form):
+    title = forms.CharField(label="Tittle")
+    text = forms.CharField(widget=forms.Textarea, label="Text")
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -47,5 +50,16 @@ def search(request):
         "titlePage": searched
     })
     return render(request, "encyclopedia/index.html", {
+        "entries": util.list_entries()
+    })
+
+def create(request):
+    return render(request, "encyclopedia/create.html", {
+        "title": "Create New Page",
+        "form": NewPageText
+    })
+
+def random(request):
+    return render(request, "encyclopedia/random.html", {
         "entries": util.list_entries()
     })
