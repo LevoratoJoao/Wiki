@@ -3,10 +3,11 @@ from django.shortcuts import render
 
 from . import util
 from markdown2 import Markdown
+import random
 
 class NewPageText(forms.Form):
-    title = forms.CharField(label="Tittle")
-    text = forms.CharField(widget=forms.Textarea, label="Text")
+    title = forms.CharField(label="Tittle: ")
+    text = forms.CharField(widget=forms.Textarea(attrs={'name':'text', 'rows':10, 'cols':80}), label="Text: ")
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -15,7 +16,7 @@ def index(request):
 
 def entry(request, pk):
     entryContent = util.get_entry(pk)
-    if entryContent == None:
+    if entryContent == None: # Error: page not found
         return render(request, "encyclopedia/error.html", {
             "pagePath": request.build_absolute_uri()
         })
@@ -100,7 +101,12 @@ def edit(request, pk):
         "form": NewPageText(data)
     })
 
-def random(request):
-    return render(request, "encyclopedia/random.html", {
-        "entries": util.list_entries()
+def randomPage(request):
+    entries = util.list_entries()
+    choice = random.choice(entries)
+    entryContent = util.get_entry(choice)
+    htmlContent = Markdown().convert(entryContent)
+    return render(request, "encyclopedia/entry.html", {
+        "data": htmlContent,
+        "titlePage": choice
     })

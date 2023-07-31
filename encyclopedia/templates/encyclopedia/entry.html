@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-    {% autoescape off %}
-        {{ data }}
-    {% endautoescape %}
+    {% comment %} {% autoescape off %} {% endcomment %}
+        {{ data | safe}}
+    {% comment %} {% endautoescape %} {% endcomment %}
 {% endblock %}
