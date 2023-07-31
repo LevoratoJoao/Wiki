@@ -79,6 +79,27 @@ def create(request):
         "form": NewPageText
     })
 
+def edit(request, pk):
+    if request.method == "POST":
+        form = NewPageText(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            text = form.cleaned_data.get('text')
+            util.save_entry(title, text)
+            return entry(request, title)
+        else:
+            return render(request, "encyclopedia/edit.html", {
+                "title": "Edit Page",
+                "form": NewPageText(data)
+            })
+    entryContent = util.get_entry(pk)
+    data = {"title": pk, "text": entryContent }
+    return render(request, "encyclopedia/edit.html", {
+        "title": "Edit Page",
+        "titlePage": pk,
+        "form": NewPageText(data)
+    })
+
 def random(request):
     return render(request, "encyclopedia/random.html", {
         "entries": util.list_entries()
