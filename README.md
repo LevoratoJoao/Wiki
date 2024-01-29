@@ -27,8 +27,10 @@ Here it is a simple usage example on YouTube: [Demo](https://youtu.be/hpMAJKV1eA
 
 ## Entry Page
 Visiting /wiki/TITLE, where TITLE is the title of an encyclopedia entry, will render a page that displays the contents of that encyclopedia entry.
+
 * If an entry is requested that does not exist, the user will be presented with an error page indicating that their requested page was not found.
 * If the entry does exist, the user will be presented with the page displaying the content of the entry.
+
 ## Index Page
 User can click on any entry name and be taken directly to that entry page.
 
@@ -45,7 +47,8 @@ Clicking “Create New Page” in the sidebar will take the user to a page where
   
 ## Edit Page
 On each entry page, the user will be able to click a link to be taken to a page where the user can edit that entry’s Markdown content in a textarea.
-    * The textarea is pre-populated with the existing Markdown content of the page.
-    * Once the entry is saved, the user will be redirected back to that entry’s page.
+* The textarea is pre-populated with the existing Markdown content of the page.
+* Once the entry is saved, the user will be redirected back to that entry’s page.
+
 ## Random Page
 Clicking “Random Page” in the sidebar will take user to a random encyclopedia entry.
